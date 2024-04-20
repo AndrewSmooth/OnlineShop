@@ -1,4 +1,3 @@
-from unittest.util import _MAX_LENGTH
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
@@ -16,7 +15,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
 class Product(models.Model):
     name = models.CharField(max_length=150, unique=True, verbose_name='Название')
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
@@ -29,7 +27,6 @@ class Product(models.Model):
     rating = models.DecimalField(default=0.0, max_digits=2, decimal_places=1, validators=[
             MaxValueValidator(5.0),
             MinValueValidator(0.0)], verbose_name='Рейтинг')
-            
 
     class Meta:
         db_table = 'Товар'
@@ -58,3 +55,29 @@ class Product(models.Model):
                 for i in range(int(5 - rating)):
                     output.append('z')
             return output
+
+
+class AdditionalImage(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name='Товар')
+    image = models.ImageField(upload_to='goods_images', blank=True, null=True, verbose_name='Дополнительное изображение')
+
+    class Meta:
+        verbose_name = 'Дополнительное изображение'
+        verbose_name_plural = 'Дополнительные изображения'
+
+class Size(models.Model):
+       SIZE_CHOICES = [
+        ('Small', 'Small'),
+        ('Medium', 'Medium'),
+        ('Large', 'Large'),
+        ('XL', 'XL'),
+        ('XXL', 'XXL'),
+        ]
+       
+       product = models.ForeignKey(Product, on_delete=models.CASCADE,  verbose_name='Товар')
+       name = models.CharField(max_length=50, choices=SIZE_CHOICES, verbose_name = 'Размер')
+       quantity = models.PositiveIntegerField(default=0, verbose_name='Количество')
+
+       class Meta:
+        verbose_name = 'Размер|количетсво'
+        verbose_name_plural = 'Размеры|количество'

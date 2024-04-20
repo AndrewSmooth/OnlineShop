@@ -41,24 +41,6 @@
             </a>
             <h4>{{ product.name }}</h4>
             {% get_rating_markup %}
-            {% comment %} {% if product.rating %}
-            <div class="rating">
-            {% for star in product.get_rating %}
-                {% if star == 'f' %}
-                <i class="fa fa-star"></i>
-                {% endif %}
-                
-                {% if star == 'h' %}
-                <i class="fa fa-star-half"></i>
-                {% endif %}
-
-                {% if star == 'z' %}
-                <i class="fa fa-star-o"></i>
-                {% endif %}
-
-            {% endfor %}
-            </div>
-            {% endif %} {% endcomment %}
             <p>&#36; {{ product.sell_price }}</p>
             <p>Sale: {{ product.discount }}%</p>
             </div>
@@ -89,24 +71,12 @@
 </div>
 {% endif %}
 </div>
- <script>
-        const button = document.getElementById("filterBtn");
-        button.addEventListener("click", function () 
-        {
-            const orderByInput = document.getElementById("orderByInput")
-            const orderBySelect = document.getElementById("orderBySelect") 
-            orderByInput.value = orderBySelect.value
-            localStorage.setItem('selectedOrderBy', document.getElementById("orderBySelect").value)
-        })
-
+<script>
         document.getElementById("categorySelect").addEventListener("change", function()  
         {localStorage.setItem('selectedCategory', document.getElementById("categorySelect").value)})
 
         if (localStorage.getItem('selectedOrderBy')) {
         document.getElementById("orderBySelect").value = localStorage.getItem('selectedOrderBy')} 
-
-        if (localStorage.getItem('selectedCategory')) {
-        document.getElementById("categorySelect").value = localStorage.getItem('selectedCategory')} 
 </script>
 
 {% endblock %}

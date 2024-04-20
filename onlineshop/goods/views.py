@@ -1,7 +1,7 @@
 from django.shortcuts import get_list_or_404, render
 from django.core.paginator import Paginator
 
-from goods.models import Product
+from goods.models import Product, AdditionalImage
 
 # Create your views here.
 
@@ -37,9 +37,20 @@ def catalog(request, category_slug=None):
 
 def product(request, product_slug):
     product = Product.objects.get(slug=product_slug)
+    images = product.additionalimage_set.all()
 
     context = {
-        'product': product
+        'product': product,
+        'images': images,
     }
 
     return render(request, 'goods/product.html', context)
+
+def product_images(request, product_slug):
+    images = Product.objects.get(slug=product_slug).additionalimage_set.all()
+
+    context = {
+        'images': images,
+    }
+
+    return render(request, 'goods/product-images.html', context)

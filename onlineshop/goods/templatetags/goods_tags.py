@@ -39,4 +39,12 @@ def get_rating_markup(context):
                   rating_markup += '<i class="fa fa-star-o"></i>'
         return mark_safe(rating_markup + '</div>')
     return mark_safe(rating_markup + 5*'<i class="fa fa-star-o"></i>' + '</div>')
+
+@register.simple_tag(takes_context=True)
+def get_images_count(context):
+    if context['images']:
+        return context['images'].count()
+    return 0
+        
+
     

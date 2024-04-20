@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from goods.models import Category, Product
+from goods.models import Category, Product, AdditionalImage, Size
 
 # Register your models here.
 
@@ -8,6 +8,20 @@ from goods.models import Category, Product
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name', )}
     list_display = ['name',]
+
+@admin.register(AdditionalImage)
+class AdditionalImageAdmin(admin.ModelAdmin):
+    list_display = ['product',]
+
+@admin.register(Size)
+class SizeAdmin(admin.ModelAdmin):
+    list_display = ['product', 'name', 'quantity']
+
+class AdditionalImageInline(admin.TabularInline):
+    model = AdditionalImage
+
+class SizeInline(admin.TabularInline):
+    model = Size
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -27,4 +41,8 @@ class ProductAdmin(admin.ModelAdmin):
         'category',
         'rating',
     ]
+    inlines = (AdditionalImageInline, SizeInline)
+    
 
+
+    

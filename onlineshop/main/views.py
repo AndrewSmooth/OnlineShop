@@ -1,11 +1,13 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import context
+from goods.models import Product
 
 def index(request):
+    goods = Product.objects.all()
+
     context={
         'title': 'Onlineshop',
         'display': 'block',
+        'goods': goods,
     }
     return render(request, 'main/index.html', context)
 
