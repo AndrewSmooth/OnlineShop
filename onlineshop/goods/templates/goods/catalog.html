@@ -73,10 +73,22 @@
 </div>
 <script>
         document.getElementById("categorySelect").addEventListener("change", function()  
-        {localStorage.setItem('selectedCategory', document.getElementById("categorySelect").value)})
+        {localStorage.setItem('categorySelect', document.getElementById("categorySelect").value)})
 
-        if (localStorage.getItem('selectedOrderBy')) {
-        document.getElementById("orderBySelect").value = localStorage.getItem('selectedOrderBy')} 
+        document.getElementById("orderBySelect").addEventListener("change", function()  
+        {localStorage.setItem('orderBySelect', document.getElementById("orderBySelect").value)})
+
+        document.getElementById("filterBtn").addEventListener("click", function()
+        {document.getElementById("orderByInput").value = document.getElementById("orderBySelect").value
+        
+        }
+        )
+
+        if (localStorage.getItem('categorySelect')) {
+        document.getElementById("categorySelect").value = localStorage.getItem('categorySelect')} 
+
+        if (localStorage.getItem('orderBySelect')) {
+        document.getElementById("orderBySelect").value = localStorage.getItem('orderBySelect')} 
 </script>
 
 {% endblock %}
