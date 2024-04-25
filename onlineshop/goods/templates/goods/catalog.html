@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% load goods_tags %}
+
+{% block content %}
+<div class="small-container">
+
+<form class="filter-form" action="{% url "catalog:index" slug_url %}" method="get">
+    <div class="row row-2">
+        <h2>All Products</h2>
+
+        <select id="categorySelect" onchange="location = this.value">
+        {% tag_categories as categories %}
+        {% for category in categories %}
+            <option value={% url "catalog:index" category.slug %}>{{category.name}}</option>
+        {% endfor %}
+        </select>
+
+        <select id='orderBySelect'>
+        <option value="default">Default Shorting</option> 
+        <option name="order_by" value="price">Short by Price</option>
+        {% comment %} <option name="order_by" value="">Short by Popularity</option> {% endcomment %}
+        <option name="order_by" value="-rating">Short by Rating</option>
+         <option name="order_by" value="-discount">Short by Sale</option>
+        </select>
+
+        <input id='orderByInput' type="hidden" name="order_by", value="default"/> 
+    </div>
+    <button id="filterBtn" class="filter-btn" type="submit">Применить</button>
+</form>
+
+    <div class="row">
+         {% if goods %}
+
+         {% for product in goods %}
+        <div class="col-4">
+            <a href="{% url "catalog:product" product.slug %}">
+                {% if product.image %}
+                <img src="{{ product.image.url }}">
+                {% endif %}
+            </a>
+            <h4>{{ product.name }}</h4>
+            {% get_rating_markup %}
+            {% comment %} {% if product.rating %}
+            <div class="rating">
+            {% for star in product.get_rating %}
+                {% if star == 'f' %}
+                <i class="fa fa-star"></i>
+                {% endif %}
+                
+                {% if star == 'h' %}
+                <i class="fa fa-star-half"></i>
+                {% endif %}
+
+                {% if star == 'z' %}
+                <i class="fa fa-star-o"></i>
+                {% endif %}
+
+            {% endfor %}
+            </div>
+            {% endif %} {% endcomment %}
+            <p>&#36; {{ product.sell_price }}</p>
+            <p>Sale: {{ product.discount }}%</p>
+            </div>
+            
+        {% endfor %}
+        {% endif %}
+    </div>
+        
+{% if goods %}
+<div class="page-btn">
+    <a class="{% if not goods.has_previous %}disabled{% endif %}"  
+    href="{% if goods.has_previous %}?{% change_params page=goods.previous_page_number %}{% else %}#{% endif %}">
+        <span>&#8592;</span>
+        </a>
+    {% for page in goods.paginator.page_range %}
+    {% if page >= goods.number|add:-3 and page <= goods.number|add:3 %}
+    <a href="?{% change_params page=page %}">
+        <span class="{% if goods.number == page %}active{% endif %}">{{ page }}</span>
+    </a>
+    {% endif %}
+    {% endfor %}
+
+<a class="{% if not goods.has_next %}disabled{% endif %}"  
+    href="{% if goods.has_next %}?{% change_params page=goods.next_page_number %}{% else %}#{% endif %}">
+<span>&#8594;</span>
+</a>
+
+</div>
+{% endif %}
+</div>
+ <script>
+        const button = document.getElementById("filterBtn");
+        button.addEventListener("click", function () 
+        {
+            const orderByInput = document.getElementById("orderByInput")
+            const orderBySelect = document.getElementById("orderBySelect") 
+            orderByInput.value = orderBySelect.value
+            localStorage.setItem('selectedOrderBy', document.getElementById("orderBySelect").value)
+        })
+
+        document.getElementById("categorySelect").addEventListener("change", function()  
+        {localStorage.setItem('selectedCategory', document.getElementById("categorySelect").value)})
+
+        if (localStorage.getItem('selectedOrderBy')) {
+        document.getElementById("orderBySelect").value = localStorage.getItem('selectedOrderBy')} 
+
+        if (localStorage.getItem('selectedCategory')) {
+        document.getElementById("categorySelect").value = localStorage.getItem('selectedCategory')} 
+</script>
+
+{% endblock %}

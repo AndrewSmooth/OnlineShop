@@ -1,13 +1,25 @@
 {% extends "base.html" %}
-{% load static %}  
+{% load static %}
 
 {% block header %}
-<h1>Give Your Workout<br>A New Style!</h1>
-<p>success isn't always about greatness. It's about consistency. Consistency <br> hard work gains success. Greatness will come.</p>
-<a href="" class="btn">Explore Now &#9822;</a>
+<div class="col-2">
+
+    <h1>Give Your Workout<br>A New Style!</h1>
+    <p>success isn't always about greatness. It's about consistency. Consistency <br> hard work gains success. Greatness
+        will come.</p>
+    <a href="" class="btn">Explore Now &#9822;</a>
+
+</div>
+<div class="col-2">
+    <img src="{% static 'images/one.png' %}" width="50%">
+</div>
+</div>
+</div>
+</div>
 {% endblock %}
 
-{% block content %}  
+
+{% block content %}
 <div class="col-2">
     <!---------featured catogries---------->
     <div class="categories">
@@ -24,7 +36,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
     <!---------featured products---------->
@@ -204,7 +216,8 @@
                 <div class="col-2">
                     <p>Exclusively Available on RedStore</p>
                     <h1>Smart Band 4</h1>
-                    <small>The Mi Band 4 features a 39.9% larger (than Mi Band 3) AMOLED color full-touch display with adjustable brightness, so everything is clear as can be.</small>
+                    <small>The Mi Band 4 features a 39.9% larger (than Mi Band 3) AMOLED color full-touch display with
+                        adjustable brightness, so everything is clear as can be.</small>
                     <br><a href="" class="btn">Buy Now &#9822;</a>
                 </div>
             </div>
@@ -217,7 +230,8 @@
             <div class="row">
                 <div class="col-3">
                     <i class="fa fa-quote-left"></i>
-                    <p> Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been the industry's standard text ever.</p>
+                    <p> Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been
+                        the industry's standard text ever.</p>
 
                     <div class="rating">
                         <i class="fa fa-star"></i>
@@ -231,7 +245,8 @@
                 </div>
                 <div class="col-3">
                     <i class="fa fa-quote-left"></i>
-                    <p>Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been the industry's standard text ever.</p>
+                    <p>Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been
+                        the industry's standard text ever.</p>
 
                     <div class="rating">
                         <i class="fa fa-star"></i>
@@ -245,7 +260,8 @@
                 </div>
                 <div class="col-3">
                     <i class="fa fa-quote-left"></i>
-                    <p>Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been the industry's standard text ever.</p>
+                    <p>Lorem Ipsum is simply dummy test of the printing ans typesetting industry. Lorem Ipsum has been
+                        the industry's standard text ever.</p>
 
                     <div class="rating">
                         <i class="fa fa-star"></i>
@@ -283,4 +299,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
+    {% endblock %}

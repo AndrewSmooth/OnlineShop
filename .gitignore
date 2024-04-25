@@ -2,5 +2,11 @@
 .vscode
 venv
 .env
+<<<<<<< HEAD
 media 
 fixtures
+=======
+fixtures
+media
+images
+>>>>>>> b449404 (make goods)

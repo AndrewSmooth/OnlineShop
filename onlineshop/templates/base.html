@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
-    <div class="header">
+    {% if display %}
+    <div class="header" style="display: '{{ display }}';">
+        {% endif %}
         <div class="container">
             <div class="navbar">
                 <div class="logo">
@@ -22,7 +23,7 @@
                 <nav>
                     <ul id="MenuItems">
                         <li><a href="{% url 'main:index' %}">Home</a></li>
-                        <li><a href="products.html">Product</a></li>
+                        <li><a href="{% url 'goods:index' 'all' %}">Product</a></li>
                         <li><a href="{% url 'main:about' %}">About</a></li>
                         <li><a href="{% url 'main:contact' %}">Contact</a></li>
                         <li><a href="account.html">Account</a></li>
@@ -32,19 +33,17 @@
                 <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
             </div>
             <div class="row">
-                <div class="col-2">
+                
                     {% block header %}
 
                     {% endblock %}
                 </div>
-                <div class="col-2">
-                    <img src="{% static 'images/one.png' %}" width="50%">
-                </div>
             </div>
-        </div>
-    </div>
+    
+        
+{% block content %}
 
-
+{% endblock %}
 
 {% comment %}  
     <!---------featured catogries---------->
@@ -79,7 +78,6 @@
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star"></i>
                     <i class="fa fa-star-half"></i>
-
                 </div>
                 <p>&#8377; 500</p>
             </div>
