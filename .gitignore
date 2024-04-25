@@ -6,4 +6,5 @@ media
 fixtures
 media
 images
-
+__pycache__
+migrations
