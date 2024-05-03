@@ -26,7 +26,10 @@
                         <li><a href="{% url 'goods:index' 'all' %}">Product</a></li>
                         <li><a href="{% url 'main:about' %}">About</a></li>
                         <li><a href="{% url 'main:contact' %}">Contact</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="{% url 'users:account' %}">Account</a></li>
+                        {% if user.is_authenticated %}
+                        <li><a href="{% url 'users:profile' %}">Profile</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
                 <a href="cart.html"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
